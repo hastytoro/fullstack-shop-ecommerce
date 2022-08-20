@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 
+import Product from "../components/Product";
+
 import { useQuery } from "urql";
 import { PRODUCT_QUERY } from "../lib/query";
 
@@ -8,9 +10,12 @@ export default function Home() {
   // FETCH FROM STRAPI WITH URQL AND GRAPHQL QUERY:
   const [results] = useQuery({ query: PRODUCT_QUERY });
   const { data, fetching, error } = results;
+
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Oh no! {error.message}</p>;
-  console.log(data);
+
+  const products = data.products.data;
+
   return (
     <div>
       <Head>
@@ -21,7 +26,10 @@ export default function Home() {
 
       <main>
         <h1>Superdry+</h1>
-        <Link href={"/about"} children="About" />
+        {products.map((product) => (
+          <Product key={product.attributes.slug} product={product} />
+        ))}
+        {/* <Link href={"/about"} children="About" /> */}
       </main>
     </div>
   );
