@@ -1,13 +1,14 @@
 import Head from "next/head";
 import Link from "next/link";
 
+import { Gallery } from "../styles/Gallery";
 import Product from "../components/Product";
 
 import { useQuery } from "urql";
 import { PRODUCT_QUERY } from "../lib/query";
 
 export default function Home() {
-  // FETCH FROM STRAPI WITH URQL AND GRAPHQL QUERY:
+  // Fetch from `strapi` with `urql` and graphql query:
   const [results] = useQuery({ query: PRODUCT_QUERY });
   const { data, fetching, error } = results;
 
@@ -26,9 +27,11 @@ export default function Home() {
 
       <main>
         <h1>Superdry+</h1>
-        {products.map((product) => (
-          <Product key={product.attributes.slug} product={product} />
-        ))}
+        <Gallery>
+          {products.map((product) => (
+            <Product key={product.attributes.slug} product={product} />
+          ))}
+        </Gallery>
         {/* <Link href={"/about"} children="About" /> */}
       </main>
     </div>
