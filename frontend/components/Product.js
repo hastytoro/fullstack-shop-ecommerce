@@ -1,4 +1,5 @@
 import { ProductFlex, ImageWrapper } from "../styles/ProductWrapper";
+import Link from "next/link";
 
 export default function Product({ product }) {
   // Extract information from prop
@@ -6,10 +7,12 @@ export default function Product({ product }) {
   const imgUrl = image.data.attributes.formats.small.url;
   return (
     <ProductFlex>
-      <ImageWrapper>
-        <img src={imgUrl} alt="" />
-      </ImageWrapper>
-      <h2>{title}</h2>
+      <Link href={`/product/${slug}`}>
+        <ImageWrapper>
+          <img src={imgUrl} alt="" />
+        </ImageWrapper>
+      </Link>
+      <h3>{title}</h3>
       <h3>{price}</h3>
     </ProductFlex>
   );

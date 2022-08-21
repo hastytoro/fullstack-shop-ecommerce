@@ -1,19 +1,24 @@
 import styled from "styled-components";
 
 export const ProductFlex = styled.div`
+  /* testing */
+  max-height: 380px;
+  /* ... */
   background: white;
   position: relative;
-  /* max-height: 400px; */
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   img {
-    width: 100%;
-    height: 90%;
+    /* width: 100%; */
+    /* height: 100%; */
+    /* testing */
+    width: 80%;
+    height: 80%;
+    /* ... */
     object-fit: contain;
-    cursor: pointer;
   }
   h2,
   h3 {
@@ -23,5 +28,11 @@ export const ProductFlex = styled.div`
 
 export const ImageWrapper = styled.div`
   flex: 1 1 20rem;
+  /* centering images */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
+
+  cursor: pointer;
 `;
