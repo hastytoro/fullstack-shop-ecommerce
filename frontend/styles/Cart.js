@@ -8,16 +8,23 @@ export const CartWrapper = styled.div`
   height: 100vh;
   width: 100%;
   background: rgba(0, 0, 0, 0.4);
+  /* testing */
+  backdrop-filter: blur(1px);
+  // ...
   z-index: 100;
   display: flex;
   justify-content: flex-end;
 `;
 
 export const CartPopup = styled.div`
+  filter: drop-shadow(5px 5px 10px #494949);
   position: relative;
   background: #f1f1f1;
   width: 30%;
-  padding: 2rem 5rem;
+  /* padding: 2rem 5rem; */
+  /* testing */
+  padding: 2rem 0rem;
+  // ...
   overflow-y: scroll;
 `;
 
@@ -25,7 +32,10 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
+  /* testing */
+  border-radius: 0rem;
+  // ...
   overflow: hidden;
   background: white;
   padding: 2rem;
@@ -49,13 +59,25 @@ export const Info = styled.div`
 `;
 
 export const Quantity = styled.div`
-  margin-top: 1rem;
-  span {
-    font-size: 0.8rem;
-  }
+  display: flex;
+  align-items: center;
+  margin: 1rem 0rem;
   button {
-    border: none;
     background: transparent;
+    border: none;
+    display: flex;
+    font-size: 1.5rem;
+    padding: 0rem 0.5rem;
+  }
+  p {
+    width: 1rem;
+    text-align: center;
+  }
+  span {
+    color: var(--secondary);
+  }
+  svg {
+    color: #494949;
   }
 `;
 

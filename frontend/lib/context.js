@@ -36,6 +36,7 @@ export const StateContext = ({ children }) => {
     if (qty === 1) return;
     setQty((prevQty) => prevQty - 1);
   };
+
   const onAdd = (product, quantity) => {
     // Find if the item exists already in `cartItems` array:
     const exist = cartItems.find((item) => item.slug === product.slug);
@@ -56,6 +57,26 @@ export const StateContext = ({ children }) => {
       setCartItems([...cartItems, { ...product, quantity: quantity }]);
     }
   };
+  const onRemove = (product, quantity) => {
+    // Find if the item exists already in `cartItems` array as seen above:
+    const exist = cartItems.find((item) => item.slug === product.slug);
+    if (exist.quantity === 1) {
+      // But when we reach 1 then return everything but exclude are product.
+      // We only return the items now that do NOT `!==` match our product.
+      setCartItems(cartItems.filter((item) => item.slug !== product.slug));
+    } else {
+      // Otherwise we decrement the quantity till we reach 1 remaining.
+      // Again we don't mutate but spread existing information for the product.
+      // Then we handle the same logic as above but this time decreasing.
+      setCartItems(
+        cartItems.map((item) =>
+          item.slug === product.slug
+            ? { ...exist, quantity: exist.quantity - quantity }
+            : item
+        )
+      );
+    }
+  };
 
   return (
     <context.Provider
@@ -68,6 +89,7 @@ export const StateContext = ({ children }) => {
         cartItems,
         setCartItems,
         onAdd,
+        onRemove,
       }}
     >
       {children}
