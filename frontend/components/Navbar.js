@@ -4,9 +4,13 @@ import { Nav, NavItems } from "../styles/Navbar";
 import Cart from "./Cart";
 import { useStateContext } from "../lib/context";
 
+// AnimatePresence enables animation for components that are tree removed.
+// When adding/removing more a child they must have given a unique key prop.
+// Now `motion` components that have an `exit` will animate out when removed.
+import { AnimatePresence } from "framer-motion";
+
 export default function Navbar() {
   const { showCart, setShowCart, totalQty } = useStateContext();
-  console.log(totalQty);
   return (
     <Nav>
       <Link href={"/"}>Superdry+</Link>
@@ -17,7 +21,7 @@ export default function Navbar() {
           <h3>Cart</h3>
         </div>
       </NavItems>
-      {showCart && <Cart />}
+      <AnimatePresence>{showCart && <Cart />}</AnimatePresence>
     </Nav>
   );
 }
