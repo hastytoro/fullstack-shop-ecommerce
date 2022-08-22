@@ -24,10 +24,10 @@ const context = createContext();
 
 export const StateContext = ({ children }) => {
   // Adding data for the global context state API:
+  const [qty, setQty] = useState(1);
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [qty, setQty] = useState(1);
-
+  console.log(cartItems);
   // Function handlers:
   const increaseQty = () => {
     setQty((prevQty) => prevQty + 1);
@@ -36,9 +36,40 @@ export const StateContext = ({ children }) => {
     if (qty === 1) return;
     setQty((prevQty) => prevQty - 1);
   };
+  const onAdd = (product, quantity) => {
+    // Find if the item exists already in `cartItems` array:
+    const exist = cartItems.find((item) => item.slug === product.slug);
+    // Never mutate state directly instead always return spread a updated clone.
+    // Again if true we spread existing properties and update only the quantity.
+    // Otherwise just spread the current cart items array with the new product.
+    if (exist) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.slug === product.slug
+            ? { ...exist, quantity: exist.quantity + quantity }
+            : item
+        )
+      );
+    } else {
+      // If false it does not exist then so add the product to cart:
+      // We spread existing items keeping state intact but add this new object:
+      setCartItems([...cartItems, { ...product, quantity: quantity }]);
+    }
+  };
 
   return (
-    <context.Provider value={{ qty, increaseQty, decreaseQty }}>
+    <context.Provider
+      value={{
+        qty,
+        increaseQty,
+        decreaseQty,
+        showCart,
+        setShowCart,
+        cartItems,
+        setCartItems,
+        onAdd,
+      }}
+    >
       {children}
     </context.Provider>
   );

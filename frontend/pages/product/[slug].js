@@ -15,7 +15,8 @@ import { useStateContext } from "../../lib/context";
 
 export default function SlugDetail() {
   // Use "consume" context state:
-  const { qty, increaseQty, decreaseQty } = useStateContext();
+  const { qty, increaseQty, decreaseQty, onAdd } = useStateContext();
+
   // Fetch slug from the url with useRouter hook.
   const { query } = useRouter();
   // Fetch from `strapi` with `urql` and graphql query:
@@ -23,11 +24,14 @@ export default function SlugDetail() {
     query: GET_PRODUCT_QUERY,
     variables: { slug: query.slug },
   });
+
   const { data, fetching, error } = results;
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Oh no! {error.message}</p>;
+
   // Extract our data from the graphql backend query:
-  const { title, description, price, image } = data.products.data[0].attributes;
+  const product = data.products.data[0].attributes;
+  const { title, description, image } = product;
   const imgUrl = image.data.attributes.formats.medium.url;
 
   return (
@@ -46,7 +50,7 @@ export default function SlugDetail() {
             <AiOutlinePlusCircle />
           </button>
         </Quantity>
-        <Buy>Add to cart</Buy>
+        <Buy onClick={() => onAdd(product, qty)}>Add to cart</Buy>
       </DetailInfo>
     </DetailWrapper>
   );
