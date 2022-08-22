@@ -9,7 +9,7 @@ import {
   Quantity,
   Buy,
 } from "../../styles/SlugDetail";
-import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
 export default function SlugDetail() {
   // Fetch slug from the url with useRouter hook.
@@ -35,11 +35,11 @@ export default function SlugDetail() {
         <Quantity>
           <span>Quantity</span>
           <button>
-            <AiFillMinusCircle />
+            <AiOutlineMinusCircle />
           </button>
           <p>0</p>
           <button>
-            <AiFillPlusCircle />
+            <AiOutlinePlusCircle />
           </button>
         </Quantity>
         <Buy>Add to cart</Buy>
