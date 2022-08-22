@@ -9,7 +9,6 @@ export const CartWrapper = styled.div`
   width: 100%;
   background: rgba(0, 0, 0, 0.4);
   z-index: 100;
-
   display: flex;
   justify-content: flex-end;
 `;

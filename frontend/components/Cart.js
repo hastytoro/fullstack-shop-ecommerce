@@ -11,10 +11,11 @@ import { FiShoppingCart } from "react-icons/fi";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
 
 export default function Cart() {
-  const { qty, cartItems, decreaseQty, increaseQty } = useStateContext();
+  const { cartItems, setShowCart, decreaseQty, increaseQty } =
+    useStateContext();
   return (
-    <CartWrapper>
-      <CartPopup>
+    <CartWrapper onClick={() => setShowCart(false)}>
+      <CartPopup onClick={(e) => e.stopPropagation()}>
         {cartItems.length < 1 && (
           <Empty>
             <h2>Your shopping cart is empty.</h2>

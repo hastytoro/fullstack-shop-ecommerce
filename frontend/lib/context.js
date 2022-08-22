@@ -27,7 +27,7 @@ export const StateContext = ({ children }) => {
   const [qty, setQty] = useState(1);
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  console.log(cartItems);
+
   // Function handlers:
   const increaseQty = () => {
     setQty((prevQty) => prevQty + 1);
