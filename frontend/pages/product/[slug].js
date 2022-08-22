@@ -9,7 +9,7 @@ import {
   Quantity,
   Buy,
 } from "../../styles/SlugDetail";
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 
 import { useStateContext } from "../../lib/context";
 
@@ -43,11 +43,11 @@ export default function SlugDetail() {
         <Quantity>
           <span>Quantity</span>
           <button onClick={decreaseQty}>
-            <AiOutlineMinusCircle />
+            <AiFillMinusCircle />
           </button>
           <p>{qty}</p>
           <button onClick={increaseQty}>
-            <AiOutlinePlusCircle />
+            <AiFillPlusCircle />
           </button>
         </Quantity>
         <Buy onClick={() => onAdd(product, qty)}>Add to cart</Buy>
