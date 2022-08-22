@@ -11,7 +11,11 @@ import {
 } from "../../styles/SlugDetail";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
+import { useStateContext } from "../../lib/context";
+
 export default function SlugDetail() {
+  // Use "consume" context state:
+  const { qty, increaseQty, decreaseQty } = useStateContext();
   // Fetch slug from the url with useRouter hook.
   const { query } = useRouter();
   // Fetch from `strapi` with `urql` and graphql query:
@@ -34,11 +38,11 @@ export default function SlugDetail() {
         <p>{description}</p>
         <Quantity>
           <span>Quantity</span>
-          <button>
+          <button onClick={decreaseQty}>
             <AiOutlineMinusCircle />
           </button>
-          <p>0</p>
-          <button>
+          <p>{qty}</p>
+          <button onClick={increaseQty}>
             <AiOutlinePlusCircle />
           </button>
         </Quantity>
