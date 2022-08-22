@@ -23,10 +23,29 @@ export const NavItems = styled.div`
     align-items: center;
   }
   h3 {
+    cursor: pointer;
     font-size: 1rem;
     padding: 0.25rem;
   }
   svg {
+    cursor: pointer;
     font-size: 1.5rem;
+  }
+  span {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    background: var(--special);
+    color: white;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--special);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    pointer-events: none;
   }
 `;

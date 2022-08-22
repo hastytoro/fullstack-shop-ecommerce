@@ -17,13 +17,13 @@ export const CartWrapper = styled.div`
 `;
 
 export const CartPopup = styled.div`
-  filter: drop-shadow(5px 5px 10px #494949);
+  filter: drop-shadow(5px 5px 20px #494949);
   position: relative;
-  background: #f1f1f1;
+  background: var(--background);
   width: 30%;
-  /* padding: 2rem 5rem; */
+  padding: 2rem 1rem;
   /* testing */
-  padding: 2rem 0rem;
+  /* padding: 2rem 0rem; */
   // ...
   overflow-y: scroll;
 `;
@@ -32,13 +32,14 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-radius: 1rem; */
+  border-radius: 0.5rem;
   /* testing */
-  border-radius: 0rem;
+  /* border-radius: 0rem; */
   // ...
   overflow: hidden;
   background: white;
   padding: 2rem;
+  /* padding: 1rem; */
   margin: 2rem 0rem;
   img {
     width: 8rem;
@@ -46,27 +47,25 @@ export const Card = styled.div`
 `;
 
 export const Info = styled.div`
-  width: 50%;
-  div {
-    display: flex;
-    justify-content: space-between;
-  }
-  h5 {
+  width: 60%;
+  p {
     /* testing */
     color: var(--secondary);
-    font-size: 0.8rem;
+    /* font-size: 0.8rem; */
   }
 `;
 
 export const Quantity = styled.div`
   display: flex;
   align-items: center;
-  margin: 1rem 0rem;
+  margin: 0.5rem 0rem;
   button {
     background: transparent;
     border: none;
     display: flex;
-    font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
     padding: 0rem 0.5rem;
   }
   p {
@@ -77,7 +76,7 @@ export const Quantity = styled.div`
     color: var(--secondary);
   }
   svg {
-    color: #494949;
+    color: var(--lightgray);
   }
 `;
 
@@ -99,5 +98,18 @@ export const Empty = styled.div`
   svg {
     font-size: 10rem;
     /* color: var(--secondary); */
+  }
+`;
+
+export const Checkout = styled.div`
+  button {
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    font-weight: 500;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
   }
 `;

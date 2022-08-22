@@ -40,7 +40,7 @@ export const Quantity = styled.div`
     color: var(--secondary);
   }
   svg {
-    color: #494949;
+    color: var(--lightgray);
   }
 `;
 

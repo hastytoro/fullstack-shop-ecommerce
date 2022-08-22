@@ -1,4 +1,4 @@
-import { ProductFlex, ImageWrapper } from "../styles/ProductWrapper";
+import { ProductFlex, ImageWrapper } from "../styles/Product";
 import Link from "next/link";
 
 export default function Product({ product }) {

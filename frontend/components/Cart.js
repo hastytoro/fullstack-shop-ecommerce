@@ -6,12 +6,13 @@ import {
   Card,
   Info,
   Quantity,
+  Checkout,
 } from "../styles/Cart";
 import { FiShoppingCart } from "react-icons/fi";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
 
 export default function Cart() {
-  const { cartItems, setShowCart, decreaseQty, onAdd, onRemove } =
+  const { cartItems, setShowCart, onAdd, onRemove, totalPrice } =
     useStateContext();
   return (
     <CartWrapper onClick={() => setShowCart(false)}>
@@ -31,22 +32,28 @@ export default function Cart() {
                   alt={item.title}
                 />
                 <Info>
-                  <h5>{item.title}</h5>
-                  <h5>{item.price}</h5>
+                  <h3>{item.title}</h3>
+                  <p>{item.price}$</p>
                   <Quantity>
                     <span>Quantity</span>
-                    <button onClick={() => onRemove(item, 1)}>
-                      <AiFillMinusCircle />
+                    <button>
+                      <AiFillMinusCircle onClick={() => onRemove(item, 1)} />
                     </button>
                     <p>{item.quantity}</p>
-                    <button onClick={() => onAdd(item, 1)}>
-                      <AiFillPlusCircle />
+                    <button>
+                      <AiFillPlusCircle onClick={() => onAdd(item, 1)} />
                     </button>
                   </Quantity>
                 </Info>
               </Card>
             );
           })}
+        {cartItems.length >= 1 && (
+          <Checkout>
+            <h3>Subtotal: {totalPrice}$</h3>
+            <button>Purchase</button>
+          </Checkout>
+        )}
       </CartPopup>
     </CartWrapper>
   );

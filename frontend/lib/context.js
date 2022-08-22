@@ -27,6 +27,8 @@ export const StateContext = ({ children }) => {
   const [qty, setQty] = useState(1);
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [totalQty, setTotalQty] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   // Function handlers:
   const increaseQty = () => {
@@ -38,6 +40,9 @@ export const StateContext = ({ children }) => {
   };
 
   const onAdd = (product, quantity) => {
+    // Increase total quantity and price:
+    setTotalQty((prevTotal) => prevTotal + quantity);
+    setTotalPrice((prevPrice) => prevPrice + product.price * quantity);
     // Find if the item exists already in `cartItems` array:
     const exist = cartItems.find((item) => item.slug === product.slug);
     // Never mutate state directly instead always return spread a updated clone.
@@ -58,6 +63,10 @@ export const StateContext = ({ children }) => {
     }
   };
   const onRemove = (product, quantity) => {
+    // Decrease total quantity:
+    setTotalPrice((prevPrice) => prevPrice - product.price);
+
+    setTotalQty((prevTotal) => prevTotal - quantity);
     // Find if the item exists already in `cartItems` array as seen above:
     const exist = cartItems.find((item) => item.slug === product.slug);
     if (exist.quantity === 1) {
@@ -88,6 +97,8 @@ export const StateContext = ({ children }) => {
         setShowCart,
         cartItems,
         setCartItems,
+        totalQty,
+        totalPrice,
         onAdd,
         onRemove,
       }}
