@@ -16,6 +16,10 @@ import { motion } from "framer-motion";
 // Animation variants allow us to enable `staggerChildren` to parent container.
 // The main reason we create them is staggering. For example our parent Cards
 // component can stagger each child Card under it.
+// We can also use `layout` attribute in our parent for all child components.
+// If true, it auto animates children to new positions when layout changes.
+// Avoid a stretching affect by assigning `layout` to both parent and child.
+// We also apply it outside to our button to ensure it flows nicely also.
 const cards = {
   hidden: { opacity: 1 },
   show: {
@@ -57,12 +61,12 @@ export default function Cart() {
             <FiShoppingCart />
           </Empty>
         )}
-
-        <motion.div variants={cards} initial="hidden" animate="show">
+        {/* parent variant */}
+        <motion.div layout variants={cards} initial="hidden" animate="show">
           {cartItems.length >= 1 &&
             cartItems.map((item) => {
               return (
-                <Card variants={card} key={item.slug}>
+                <Card layout variants={card} key={item.slug}>
                   <img
                     src={item.image.data.attributes.formats.thumbnail.url}
                     alt={item.title}
@@ -86,7 +90,7 @@ export default function Cart() {
             })}
         </motion.div>
         {cartItems.length >= 1 && (
-          <Checkout>
+          <Checkout layout>
             <h3>Subtotal: {totalPrice}$</h3>
             <button>Purchase</button>
           </Checkout>
