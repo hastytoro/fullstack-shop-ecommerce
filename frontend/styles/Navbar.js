@@ -47,5 +47,6 @@ export const NavItems = styled.div`
     font-size: 0.7rem;
     padding: 0.5rem;
     pointer-events: none;
+    filter: drop-shadow(0px 0px 0.5rem var(--special));
   }
 `;
