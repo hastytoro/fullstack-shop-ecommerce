@@ -50,8 +50,21 @@ export default function Cart() {
       url: "/api/stripe",
       data: cartItems,
     });
+    console.log(response.data.id);
     await stripePromise.redirectToCheckout({ sessionId: response.data.id });
   };
+  // const checkoutHandler = async () => {
+  //   const stripePromise = await getStripe();
+  //   const response = await fetch("/api/stripe", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(cartItems),
+  //   });
+  //   const data = await response.json();
+  //   await stripePromise.redirectToCheckout({ sessionId: data.id });
+  // };
 
   return (
     <CartWrapper

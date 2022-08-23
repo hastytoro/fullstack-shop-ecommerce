@@ -12,8 +12,13 @@ export default async function expressService(req, res) {
         mode: "payment",
         payment_method_types: ["card"],
         shipping_address_collection: {
-          allowed_countries: ["US", "CA", "ZA", "GB", "IT"],
+          allowed_countries: ["US", "CA", "ZA", "GB", "IT", "DE"],
         },
+        shipping_options: [
+          { shipping_rate: "shr_1LZwbZJSo5bJNqnzqzRRjhMc" },
+          { shipping_rate: "shr_1LZwguJSo5bJNqnzop3FuXzz" },
+        ],
+        allow_promotion_codes: true,
         line_items: req.body.map((item) => {
           return {
             price_data: {
