@@ -3,7 +3,6 @@ import {
   CartWrapper,
   CartPopup,
   Empty,
-  Cards,
   Card,
   Info,
   Quantity,
@@ -11,6 +10,10 @@ import {
 } from "../styles/Cart";
 import { FiShoppingCart } from "react-icons/fi";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
+
+// Payment logic and posting to next backend api called stripe:
+import axios from "axios";
+import getStripe from "../lib/getStripe";
 
 import { motion } from "framer-motion";
 // Animation variants allow us to enable `staggerChildren` to parent container.
@@ -37,6 +40,19 @@ const card = {
 export default function Cart() {
   const { cartItems, setShowCart, onAdd, onRemove, totalPrice } =
     useStateContext();
+
+  // Payment fetching logic (consider axios):
+  // We use the next api folder to handle the post request like a mini-express.
+  const checkoutHandler = async () => {
+    const stripePromise = await getStripe();
+    const response = await axios({
+      method: "post",
+      url: "/api/stripe",
+      data: cartItems,
+    });
+    await stripePromise.redirectToCheckout({ sessionId: response.data.id });
+  };
+
   return (
     <CartWrapper
       onClick={() => setShowCart(false)}
@@ -92,7 +108,7 @@ export default function Cart() {
         {cartItems.length >= 1 && (
           <Checkout layout>
             <h3>Subtotal: {totalPrice}$</h3>
-            <button>Purchase</button>
+            <button onClick={checkoutHandler}>Purchase</button>
           </Checkout>
         )}
       </CartPopup>
