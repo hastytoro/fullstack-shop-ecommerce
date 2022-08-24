@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import { withPageAuthRequired, getSession } from "@auth0/nextjs-auth0";
 import styled from "styled-components";
 
+import formatMoney from "../lib/formatMoney";
+
 const stripe = require("stripe")(
   `${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`
 );
@@ -31,7 +33,7 @@ export default function Profile({ user, orders }) {
                 Order number: <span>{order.id}</span>
               </h3>
               <h3>
-                Amount: <span>{order.amount}</span>
+                Amount: <span>{formatMoney(order.amount)}</span>
               </h3>
               <h3>
                 Receipt: <span>{user.email}</span>
