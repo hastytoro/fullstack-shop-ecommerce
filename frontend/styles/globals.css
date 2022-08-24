@@ -45,12 +45,13 @@ img {
   display: block;
   border: none;
   border-radius: 2px;
+  pointer-events: none;
 }
 
 button {
   font-weight: bold;
+  background: var(--primary);
 }
-
 /* 
 @media (prefers-color-scheme: dark) {
   html {

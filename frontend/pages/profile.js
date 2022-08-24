@@ -57,6 +57,9 @@ const ProfileWrapper = styled.div`
     padding: 1rem 2rem;
     margin-top: 1rem;
     cursor: pointer;
+    &:hover {
+      background: hsla(0, 0%, 18%, 0.9);
+    }
   }
 `;
 

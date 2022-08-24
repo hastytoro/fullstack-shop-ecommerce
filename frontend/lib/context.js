@@ -91,6 +91,7 @@ export const StateContext = ({ children }) => {
     <context.Provider
       value={{
         qty,
+        setQty,
         increaseQty,
         decreaseQty,
         showCart,

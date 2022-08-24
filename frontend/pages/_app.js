@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps }) {
     <UserProvider>
       <StateContext>
         <Provider value={client}>
-          {/* <Toaster /> */}
           <Toaster
             toastOptions={{
               style: {
