@@ -37,6 +37,8 @@ const card = {
   show: { opacity: 1, scale: 1 },
 };
 
+import { toast } from "react-hot-toast";
+
 export default function Cart() {
   const { cartItems, setShowCart, onAdd, onRemove, totalPrice } =
     useStateContext();
@@ -50,7 +52,7 @@ export default function Cart() {
       url: "/api/stripe",
       data: cartItems,
     });
-    console.log(response.data.id);
+    toast.loading("Waiting...");
     await stripePromise.redirectToCheckout({ sessionId: response.data.id });
   };
   // const checkoutHandler = async () => {

@@ -13,6 +13,8 @@ import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 
 import { useStateContext } from "../../lib/context";
 
+import toast from "react-hot-toast";
+
 export default function SlugDetail() {
   // Use "consume" context state:
   const { qty, increaseQty, decreaseQty, onAdd } = useStateContext();
@@ -34,6 +36,11 @@ export default function SlugDetail() {
   const { title, description, image } = product;
   const imgUrl = image.data.attributes.formats.medium.url;
 
+  // Create a toast :)
+  const notify = () => {
+    toast.success(`${title} added!`, { duration: 1500 });
+  };
+
   return (
     <DetailWrapper>
       <img src={imgUrl} alt={title} />
@@ -50,7 +57,14 @@ export default function SlugDetail() {
             <AiFillPlusCircle />
           </button>
         </Quantity>
-        <Buy onClick={() => onAdd(product, qty)}>Add to cart</Buy>
+        <Buy
+          onClick={() => {
+            onAdd(product, qty);
+            notify();
+          }}
+        >
+          Add to cart
+        </Buy>
       </DetailInfo>
     </DetailWrapper>
   );
