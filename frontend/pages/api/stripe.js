@@ -3,13 +3,21 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(`${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`);
 
-export default async function expressService(req, res) {
+import { getSession } from "@auth0/nextjs-auth0";
+
+export default async function nextExpress(req, res) {
+  // Create user session object that captures data from `req.body` param.
+  const session = getSession(req, res);
+  const user = session?.user;
+  const stripeId = user["http://localhost:3000/stripe_customer_id"];
+
   // Create checkout session object that captures data from `req.body` param.
   if (req.method === "POST") {
     try {
       const session = await stripe.checkout.sessions.create({
         submit_type: "pay",
         mode: "payment",
+        customer: stripeId,
         payment_method_types: ["card"],
         shipping_address_collection: {
           allowed_countries: ["US", "CA", "ZA", "GB", "IT", "DE"],
@@ -48,3 +56,50 @@ export default async function expressService(req, res) {
     }
   }
 }
+
+// BELOW IS THE AUTH PIPELINE RULE USED TO CAPTURE STRIPE SESSION DATA:
+// If successful "app_metadata" will appear in the auth0 dashboard under rules.
+// 1) Update secret key, see below - 2) Ensure correct URL, see below.
+// Finally we can use 3) A getSession hook, as seen above.
+/*
+function (user, context, callback) {
+  user.app_metadata = user.app_metadata || {};
+
+  if ("stripe_customer_id" in user.app_metadata) {
+    context.idToken["http://localhost:3000/stripe_customer_id"] =
+      user.app_metadata.stripe_customer_id;
+
+    return callback(null, user, context);
+  }
+
+  const stripe = require("stripe")("SK_KEY_HERE");
+
+  const customer = {
+    email: user.email,
+
+    description: user.name,
+  };
+
+  stripe.customers.create(customer, function (err, customer) {
+    if (err) {
+      return callback(err);
+    }
+
+    user.app_metadata.stripe_customer_id = customer.id;
+
+    auth0.users
+      .updateAppMetadata(user.user_id, user.app_metadata)
+
+      .then(function () {
+        context.idToken["http://localhost:3000/stripe_customer_id"] =
+          user.app_metadata.stripe_customer_id;
+
+        callback(null, user, context);
+      })
+
+      .catch(function (err) {
+        callback(err);
+      });
+  });
+}
+*/
