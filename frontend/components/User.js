@@ -30,7 +30,7 @@ export default function User() {
 const Profile = styled.div`
   img {
     border-radius: 50%;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
   }
 `;
