@@ -20,7 +20,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const { showCart, setShowCart, totalQty } = useStateContext();
-  const { user, error, isLoading } = useUser();
   return (
     <Nav>
       <Link href={"/"}>Superdry+</Link>

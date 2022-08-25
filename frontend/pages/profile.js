@@ -61,6 +61,7 @@ const ProfileWrapper = styled.div`
       background: hsla(0, 0%, 18%, 0.9);
     }
   }
+  margin-bottom: 5vh; /* temp space for footer */
 `;
 
 const Order = styled.div`
